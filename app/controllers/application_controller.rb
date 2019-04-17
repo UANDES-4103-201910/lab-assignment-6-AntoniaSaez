@@ -6,17 +6,17 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @_current_user ||= session[:current_user_id] &&
-        User.find_by(id: session[:current_user_id])
+    user_id = cookies["authentification"]
+        return user_id
     end
   end
 
   def is_user_logged_in?
 	#complete this method
   	logged_in = false
-  if session[:current_user_id].presence? && session[:current_user_id].notnill?
+  if current_user != nil
     logged_in = true
-  end 
-	if logged_in then true else redirect_to root_path end
   end
+	if logged_in then true else redirect_to root_path end
+
 end
