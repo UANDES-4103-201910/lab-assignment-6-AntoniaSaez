@@ -8,14 +8,16 @@ class SessionsController < ApplicationController
       # Save the user ID in the session so it can be used in
       # subsequent requests
       session[:current_user_id] = user.id
-			flash[:notice] = ""
+			flash[:notice] = "You are successfully log in"
       redirect_to root_path
     end
 	else
-		flash[:notice] = ""
+		flash[:notice] = "Your email or password are incorrect"
 	end
 
 	def destroy
-		#complete this method
+		# Remove the user id from the session
+    @_current_user = session[:current_user_id] = nil
+    redirect_to root_path
 	end
 end
